@@ -1,0 +1,42 @@
+Instructions to run the code:
+
+The code has been developed in python - linux and will be able to run in linux machines as we have used linux libraries, which are not available in windows.
+
+Install psutil library for python from the location : https://pypi.python.org/pypi?:action=display&name=psutil#downloads
+Choose this file to download : psutil-1.2.0.tar.gz (md5)
+Go to the location where the file was saved.
+Unzip the file using the following command :
+	gunzip psutil-1.2.0.tar.gz 
+	tar -xvf psutil-1.2.0.tar
+Go inside the unzipped folder and run the command:
+	sudo python setup.py install	(***provide the root password when prompted***)
+
+
+Following are the steps at server:
+1. Get the ip address of machine on which server will be running.
+2. Select port number 7735 for server
+3. Check that the directory in which the incoming file will be stored, exists
+4. Select a probability value
+5. Go to the directory in which the server code file (server_go_back_n.py) is saved and type the following:
+
+python server_go_back_n.py <server ip> <server port> <full directory path to store incoming file> <probability>
+
+example:
+python server_go_back_n.py 192.168.0.105 7735 '/home/gargi/Documents/IP_Project/Project_2/recv.txt' 0.05
+
+After this the server is ready.
+The server will wait for 60 seconds for packets to arrive from client. If the client does not send the packets within this time, then the server exits. Hence we should run the client code within 60 seconds after the server starts.
+
+Following are the steps at client:
+1. Get the ip address and port number of Server process.
+2. Check that the file to be transferred exists.
+3. Select a window size (N)
+4. Select a maximum-segment-size (MSS)
+5. Check that the directory in which to create the sequence file, exists. Sequence file is the file which will implement the sliding window for our project
+6. Go to the directory in which the client code file (client_go_back_n.py) is saved and type the following:
+
+python client_go_back_n.py <server ip> <server port> <full directory path of file to transmit> <window size N> <MSS> <full directory path of sequence file>
+
+example:
+python client_go_back_n.py 192.168.0.105 7735 '/home/naval-ubuntu/Project2/lotr.txt' 1024 500 '/home/naval-ubuntu/Project2/seq_file.txt'
+ 
